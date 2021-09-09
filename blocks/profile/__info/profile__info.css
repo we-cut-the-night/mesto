@@ -1,0 +1,12 @@
+.profile__info{
+  margin: 62px 0 0 28.125px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* От 1023.9px */
+@media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .profile__info{
+    margin: 26px auto 0;
+  }
+}

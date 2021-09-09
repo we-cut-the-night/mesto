@@ -1,0 +1,18 @@
+.elements__like{
+  margin: auto 0 auto;
+  padding: 0;
+  width: 22px;
+  height: 19px;
+  background-color: #fff;
+  background-image: url(../../../images/icon_like.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity .4s;
+}
+
+.elements__like:hover{
+  opacity: .5;
+}

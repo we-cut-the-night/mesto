@@ -1,0 +1,14 @@
+.profile__caption{
+  margin: 16px 0 0;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 22px;
+}
+
+@media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .profile__caption{
+    margin: 14px auto 0;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

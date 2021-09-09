@@ -1,0 +1,21 @@
+.elements{
+  margin: 51px auto;
+  width: calc(282px * 3 + 17px * 2);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 282px);
+  column-gap: 17px;
+  row-gap: 20px;
+}
+
+@media (min-width: calc(282px * 2 + 17px + 19px * 2)) and (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .elements{
+    width: calc(282px * 2 + 17px);
+  }
+}
+
+@media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
+  .elements{
+    width: 282px;
+    margin: 36px auto;
+  }
+}

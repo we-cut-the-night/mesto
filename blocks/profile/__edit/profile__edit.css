@@ -1,0 +1,26 @@
+.profile__edit{
+  margin: 15px auto auto 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: opacity .4s;
+  box-sizing: border-box;
+}
+
+.profile__edit:hover{
+  opacity: .6;
+}
+
+/* До 1024px */
+@media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .profile__edit{
+    margin: 8px auto auto 10px;
+    width: 18px;
+    height: 18px;
+  }
+}

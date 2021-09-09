@@ -1,0 +1,26 @@
+.popup__form-close{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(../../../images/mesto_form-close.svg);
+  background-size: cover;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  transition: opacity .4s;
+}
+
+.popup__form-close:hover{
+  opacity: .6;
+}
+
+@media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
+  .popup__form-close{
+    top: -36px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,0 +1,15 @@
+.profile__edit-icon{
+  margin: 0;
+  width: 10px;
+  height: 10px;
+}
+
+/* До 1024px */
+@media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .profile__edit-icon{
+    width: 7.5px;
+    height: 7.5px;
+  }
+}
+
+

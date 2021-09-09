@@ -1,0 +1,15 @@
+.profile__avatar{
+  margin: 40px 0 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+
+/* От 320px */
+@media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .profile__avatar{
+    margin: 42px auto 0;
+  }
+}
+
