@@ -3,3 +3,15 @@
   min-width: 320px;
   max-width: calc(1280px - 200px * 2);
 }
+
+@media (min-width: calc(282px * 2 + 17px + 19px * 2)) and (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
+  .footer{
+    width: calc(282px * 2 + 17px);
+  }
+}
+
+@media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
+  .footer{
+    width: 100%;
+  }
+}
