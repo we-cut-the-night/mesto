@@ -5,7 +5,6 @@
 /*Блок Header*/
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header_logo.css);
-@import url(../blocks/profile/__edit/profile__edit.css);
 
 /*Блок Profile*/
 @import url(../blocks/profile/profile.css);
