@@ -9,7 +9,6 @@
   border-radius: 2px;
   transition: opacity .4s;
   cursor: pointer;
-  box-sizing: border-box;
 }
 
 .profile__button:hover{
