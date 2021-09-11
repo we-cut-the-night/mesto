@@ -1,38 +1,39 @@
 let editButton = document.querySelector('.profile__edit');
-let popUp = document.querySelector('.popup');
-let popUpForm = popUp.querySelector('.popup__form');
-let editCloseButton = popUpForm.querySelector('.popup__form-close');
-let popUpSubmit = popUpForm.querySelector('.popup__form-submit');
+let popup = document.querySelector('.popup');
+let popupForm = popup.querySelector('.popup__form');
+let inputName = popupForm.querySelector('.popup__input_name');
+let inputDesc = popupForm.querySelector('.popup__input_description');
+let editCloseButton = popupForm.querySelector('.popup__form-close');
+let popupSubmit = popupForm.querySelector('.popup__form-submit');
 let profileName = document.querySelector('.profile__name');
 let profileCapt = document.querySelector('.profile__caption');
 
-function popUpOpen() {
-  popUp.classList.add('popup_opened');
+function popupInputData() {
+  inputName.value = profileName.textContent;
+  inputDesc.value = profileCapt.textContent;
 };
 
-function popUpClose() {
-  popUp.classList.remove('popup_opened');
+function popupOpen() {
+  popup.classList.add('popup_opened');
+
+  popupInputData();
+};
+
+function popupClose() {
+  popup.classList.remove('popup_opened');
 };
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  let inputName = document.querySelector('.popup__input-name');
-  let inputDesc = document.querySelector('.popup__input-description');
+  profileName.textContent = inputName.value;
+  profileCapt.textContent = inputDesc.value;
 
-  if (inputName.value.length > 0 && inputDesc.value.length > 0) {
-    profileName.textContent = inputName.value;
-    profileCapt.textContent = inputDesc.value;
-   };
-
-  inputName.value = null;
-  inputDesc.value = null;
-
-  popUpClose();
+  popupClose();
 };
 
-popUpForm.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', popUpOpen);
-editCloseButton.addEventListener('click', popUpClose);
+popupForm.addEventListener('submit', formSubmitHandler);
+editButton.addEventListener('click', popupOpen);
+editCloseButton.addEventListener('click', popupClose);
 
 

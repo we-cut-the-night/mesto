@@ -1,9 +1,15 @@
 .header__logo{
+  display: flex;
   margin: 45px 0 41px;
   width: 142px;
   height: 33px;
   background-image: url(../../../images/mesto_logo.svg);
   background-size: 142px 33px;
+  transition: opacity .4s;
+}
+
+.header__logo:hover{
+  opacity: .8;
 }
 
 @media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {

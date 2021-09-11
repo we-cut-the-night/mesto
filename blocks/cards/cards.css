@@ -1,4 +1,4 @@
-.elements{
+.cards{
   margin: 51px auto;
   width: calc(282px * 3 + 17px * 2);
   display: grid;
@@ -8,13 +8,13 @@
 }
 
 @media (min-width: calc(282px * 2 + 17px + 19px * 2)) and (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
-  .elements{
+  .cards{
     width: calc(282px * 2 + 17px);
   }
 }
 
 @media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
-  .elements{
+  .cards{
     width: 282px;
     margin: 36px auto;
   }

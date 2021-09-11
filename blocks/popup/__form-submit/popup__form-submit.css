@@ -1,5 +1,5 @@
 .popup__form-submit{
-  margin: 48px auto 0;
+  margin: 48px auto 37px;
   width: calc(100% - 36px * 2);
   height: 50px;
   background-color: #000;
@@ -18,7 +18,7 @@
 
 @media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
   .popup__form-submit{
-    margin: 45px auto 0;
+    margin: 45px auto 25px;
     width: calc(100% - 22px * 2);
     height: 46px;
     font-size: 14px;

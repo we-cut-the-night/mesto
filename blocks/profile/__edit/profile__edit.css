@@ -6,6 +6,10 @@
   width: 24px;
   height: 24px;
   background-color: #000;
+  background-image: url(../../../images/mesto_edit.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
   border: 1px solid #fff;
   cursor: pointer;
   transition: opacity .4s;
@@ -13,7 +17,7 @@
 }
 
 .profile__edit:hover{
-  opacity: .6;
+  opacity: .8;
 }
 
 /* До 1024px */
@@ -22,5 +26,6 @@
     margin: 8px auto auto 10px;
     width: 18px;
     height: 18px;
+    background-size: 7.5px 7.5px;
   }
 }
