@@ -15,8 +15,8 @@ const popupSubmit = popupForm.querySelector('.popup__form-submit');
 // Форма для загрузки фото
 const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
 const popupNewPlace = document.querySelector('.popup__form[name=new_place_form]');
-const inputNewPlaceName = popupNewPlace.querySelector('.new-place__input_type_name');
-const inputNewPlaceLink = popupNewPlace.querySelector('.new-place__input_type_link');
+const inputNewPlaceName = popupNewPlace.querySelector('.popup__input_type_name');
+const inputNewPlaceLink = popupNewPlace.querySelector('.popup__input_type_link');
 const newPlaceSubmit = popupNewPlace.querySelector('.popup__form-submit');
 const addNewPlaceCloseButton = popupNewPlace.querySelector('.popup__form-close');
 
