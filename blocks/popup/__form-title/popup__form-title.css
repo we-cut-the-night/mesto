@@ -7,7 +7,7 @@
 
 @media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
   .popup__form-title{
-    margin: 25px auto 45px;
+    margin: 25px auto 45px 22px;
     font-size: 18px;
     line-height: 22px;
   }
