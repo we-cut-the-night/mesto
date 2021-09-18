@@ -1,4 +1,4 @@
-.popup__input{
+.form__input{
   margin: 30px auto 0;
   padding: 0 0 13px 0;
   width: calc(100% - 36px * 2);
@@ -10,16 +10,16 @@
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.popup__input::placeholder {
+.form__input::placeholder {
   color: #C4C4C4;
 }
 
-.popup__input:focus {
+.form__input:focus {
   outline: none;
 }
 
 @media (max-width: calc(282px * 2 + 17px + 18.5px * 2)) {
-  .popup__input{
+  .form__input{
     width: calc(100% - 22px * 2);
   }
 }

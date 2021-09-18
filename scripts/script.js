@@ -2,25 +2,26 @@
 const editButton = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileCaption = document.querySelector('.profile__caption');
-const addNewPlaceButton = document.querySelector('.profile__button');
 
 // Форма для редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
-const inputName = popupEditProfileForm.querySelector('.popup__input_type_name');
-const inputCaption = popupEditProfileForm.querySelector('.popup__input_type_caption');
-const editCloseButton = popupEditProfileForm.querySelector('.popup__form-close');
+const editCloseButton = popupEditProfile.querySelector('.popup__close');
+const popupEditProfileForm = popupEditProfile.querySelector('.form');
+const inputName = popupEditProfileForm.querySelector('.form__input_type_name');
+const inputCaption = popupEditProfileForm.querySelector('.form__input_type_caption');
 
-// Форма для загрузки фото
+
+// Загрузка фото
+const addNewPlaceButton = document.querySelector('.profile__button')
 const popupAddNewPlace = document.querySelector('.popup_type_add-new-place');
-const popupNewPlaceForm = document.querySelector('.popup__form[name=new_place_form]');
-const inputNewPlaceName = popupNewPlaceForm.querySelector('.popup__input_type_name');
-const inputNewPlaceLink = popupNewPlaceForm.querySelector('.popup__input_type_link');
-const addNewPlaceCloseButton = popupNewPlaceForm.querySelector('.popup__form-close');
+const addNewPlaceCloseButton = popupAddNewPlace.querySelector('.popup__close');
+const popupNewPlaceForm = document.querySelector('.form[name=new_place_form]');
+const inputNewPlaceName = popupNewPlaceForm.querySelector('.form__input_type_name');
+const inputNewPlaceLink = popupNewPlaceForm.querySelector('.form__input_type_link');
 
 // Попап с фото
-const popupCard = document.querySelector('.popup-card');
-const popupCardClose = popupCard.querySelector('.popup-card__close');
+const popupCard = document.querySelector('.popup_type_card');
+const popupCardClose = popupCard.querySelector('.popup__close');
 const popupCardImg = popupCard.querySelector('.popup-card__img');
 const popupCardTitle = popupCard.querySelector('.popup-card__title');
 
@@ -32,14 +33,14 @@ function changePopupVisibility(element, classname){
   element.classList.toggle(classname);
 };
 
-function popupInputData(){
+function inputProfileData(){
   changePopupVisibility(popupEditProfile, 'popup_opened');
 
   inputName.value = profileName.textContent;
   inputCaption.value = profileCaption.textContent;
 };
 
-function popupInputImg(link, name){
+function inputCardImg(link, name){
   popupCardImg.src = link;
   popupCardImg.alt = name;
   popupCardTitle.textContent = name;
@@ -53,8 +54,8 @@ function createNewCard (link, name){
   newCard.querySelector('.card__title').textContent = name;
 
   newCard.querySelector('.card__img').addEventListener('click', function(evt){
-    changePopupVisibility(popupCard, 'popup-card_opened');
-    popupInputImg(link, name);
+    changePopupVisibility(popupCard, 'popup_opened');
+    inputCardImg(link, name);
   });
 
   newCard.querySelector('.card__like').addEventListener('click', function(evt){
@@ -68,7 +69,8 @@ function createNewCard (link, name){
   return newCard;
 };
 
-function addNewCard (newCard) {
+function addNewCard (link, name) {
+  const newCard = createNewCard(link, name);
   cardsContainer.prepend(newCard);
 };
 
@@ -87,23 +89,19 @@ function newPlaceSubmitHandler(evt){
   const newName = inputNewPlaceName.value;
   const newLink = inputNewPlaceLink.value;
 
-  const newCard = createNewCard(newLink, newName);
-  addNewCard(newCard);
+  const newCard = addNewCard(newLink, newName);
   changePopupVisibility(popupAddNewPlace, 'popup_opened');
 
   inputNewPlaceName.value = null;
   inputNewPlaceLink.value = null;
 };
 
-initialCards.reverse().forEach(item => {
-  const newCard = createNewCard(item.link, item.name);
-  addNewCard(newCard);
-});
+initialCards.reverse().forEach(item => addNewCard(item.link, item.name));
 
 addNewPlaceButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace, 'popup_opened'));
 popupNewPlaceForm.addEventListener('submit', newPlaceSubmitHandler);
-editButton.addEventListener('click', popupInputData);
+editButton.addEventListener('click', inputProfileData);
 editCloseButton.addEventListener('click', () => changePopupVisibility(popupEditProfile, 'popup_opened'));
 popupEditProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
 addNewPlaceCloseButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace, 'popup_opened'));
-popupCardClose.addEventListener('click', () => changePopupVisibility(popupCard, 'popup-card_opened'));
+popupCardClose.addEventListener('click', () => changePopupVisibility(popupCard, 'popup_opened'));

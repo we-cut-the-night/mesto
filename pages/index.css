@@ -29,26 +29,26 @@
 @import url(../blocks/card/__like/_active/card__like_active.css);
 @import url(../blocks/card/__title/card__title.css);
 
-/*Блок Footer*/
-@import url(../blocks/footer/footer.css);
-@import url(../blocks/footer/__copyright/footer__copyright.css);
-
 /*Блок Popup*/
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-@import url(../blocks/popup/__form/popup__form.css);
-@import url(../blocks/popup/__form-title/popup__form-title.css);
-@import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_name.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_description.css);
-@import url(../blocks/popup/__form-submit/popup__form-submit.css);
-@import url(../blocks/popup/__form-close/popup__form-close.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/_type/popup_type_card.css);
+@import url(../blocks/popup/__content/popup__content.css);
+
+/*Блок Form*/
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/popup__input_type_name.css);
+@import url(../blocks/form/__input/_type/popup__input_type_description.css);
+@import url(../blocks/form/__submit/form__submit.css);
 
 /*Блок Popup-card*/
 @import url(../blocks/popup-card/popup-card.css);
-@import url(../blocks/popup-card/_opened/popup-card_opened.css);
-@import url(../blocks/popup-card/__card/popup-card__card.css);
-@import url(../blocks/popup-card/__close/popup-card__close.css);
 @import url(../blocks/popup-card/__img/popup-card__img.css);
 @import url(../blocks/popup-card/__title/popup-card__title.css);
 
+/*Блок Footer*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

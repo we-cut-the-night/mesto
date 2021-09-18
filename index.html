@@ -40,28 +40,34 @@
       </section>
 
       <article class="popup popup_type_edit-profile">
-        <form class="popup__form" name="edit_profile_form">
-          <button class="popup__form-close" type="button" aria-label="Закрыть форму"></button>
-          <h2 class="popup__form-title">Редактировать профиль</h2>
-          <input required class="popup__input popup__input_type_name" type="text" name="username" placeholder="Имя">
-          <input required class="popup__input popup__input_type_caption" type="text" name="userdescription" placeholder="Описание">
-          <button class="popup__form-submit" type="submit">Сохранить</button>
-        </form>
+        <div class="popup__content">
+          <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
+          <form class="form" name="edit_profile_form">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <input required class="form__input form__input_type_name" type="text" name="username" placeholder="Имя">
+            <input required class="form__input form__input_type_caption" type="text" name="userdescription" placeholder="Описание">
+            <button class="form__submit" type="submit">Сохранить</button>
+          </form>
+        </div>
       </article>
       <article class="popup popup_type_add-new-place">
-        <form class="popup__form" name="new_place_form">
-          <button class="popup__form-close" type="button" aria-label="Закрыть форму"></button>
-          <h2 class="popup__form-title">Новое место</h2>
-          <input required class="popup__input popup__input_type_name" type="text" name="placename" placeholder="Название">
-          <input required class="popup__input popup__input_type_link" type="text" name="placelink" placeholder="Ссылка на картинку">
-          <button class="popup__form-submit" type="submit">Сохранить</button>
-        </form>
+        <div class="popup__content">
+          <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
+          <form class="form" name="new_place_form">
+            <h2 class="form__title">Новое место</h2>
+            <input required class="form__input form__input_type_name" type="text" name="placename" placeholder="Название">
+            <input required class="form__input form__input_type_link" type="text" name="placelink" placeholder="Ссылка на картинку">
+            <button class="form__submit" type="submit">Сохранить</button>
+          </form>
+        </div>
       </article>
-      <article class="popup-card">
-        <div class="popup-card__card">
-          <button class="popup-card__close" type="button" aria-label="Закрыть"></button>
-          <img class="popup-card__img" src = "#" alt="#">
-          <h2 class="popup-card__title">Место</h2>
+      <article class="popup popup_type_card">
+        <div class="popup__content">
+          <button class="popup__close" type="button" aria-label="Закрыть"></button>
+          <div class="popup-card">
+            <img class="popup-card__img" src = "#" alt="#">
+            <h2 class="popup-card__title">Место</h2>
+          </div>
         </div>
       </article>
     </main>
