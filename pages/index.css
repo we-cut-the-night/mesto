@@ -39,10 +39,13 @@
 /*Блок Form*/
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__input/form__input.css);
-@import url(../blocks/form/__input/_type/popup__input_type_name.css);
-@import url(../blocks/form/__input/_type/popup__input_type_description.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form_input-error_active.css);
 @import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit/_disabled/form__submit_disabled.css);
 
 /*Блок Popup-card*/
 @import url(../blocks/popup-card/popup-card.css);

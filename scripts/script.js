@@ -9,7 +9,7 @@ const editCloseButton = popupEditProfile.querySelector('.popup__close');
 const popupEditProfileForm = popupEditProfile.querySelector('.form');
 const inputName = popupEditProfileForm.querySelector('.form__input_type_name');
 const inputCaption = popupEditProfileForm.querySelector('.form__input_type_caption');
-
+const popupOpened = document.querySelector('popup_opened');
 
 // Загрузка фото
 const addNewPlaceButton = document.querySelector('.profile__button')
@@ -29,18 +29,18 @@ const popupCardTitle = popupCard.querySelector('.popup-card__title');
 const cardTemplate = document.querySelector('#card_template').content;
 const cardsContainer = document.querySelector('.cards');
 
-function changePopupVisibility(element, classname){
-  element.classList.toggle(classname);
+function changePopupVisibility(element){
+  element.classList.toggle('popup_opened');
 };
 
-function inputProfileData(){
-  changePopupVisibility(popupEditProfile, 'popup_opened');
+function openPopupEditProfile(){
+  changePopupVisibility(popupEditProfile);
 
   inputName.value = profileName.textContent;
   inputCaption.value = profileCaption.textContent;
 };
 
-function inputCardImg(link, name){
+function setPopupCardElements(link, name){
   popupCardImg.src = link;
   popupCardImg.alt = name;
   popupCardTitle.textContent = name;
@@ -54,8 +54,8 @@ function createNewCard (link, name){
   newCard.querySelector('.card__title').textContent = name;
 
   newCard.querySelector('.card__img').addEventListener('click', function(evt){
-    changePopupVisibility(popupCard, 'popup_opened');
-    inputCardImg(link, name);
+    changePopupVisibility(popupCard);
+    setPopupCardElements(link, name);
   });
 
   newCard.querySelector('.card__like').addEventListener('click', function(evt){
@@ -80,7 +80,7 @@ function editProfileFormSubmitHandler(evt) {
   profileName.textContent = inputName.value;
   profileCaption.textContent = inputCaption.value;
 
-  changePopupVisibility(popupEditProfile, 'popup_opened');
+  changePopupVisibility(popupEditProfile);
 };
 
 function newPlaceSubmitHandler(evt){
@@ -89,19 +89,50 @@ function newPlaceSubmitHandler(evt){
   const newName = inputNewPlaceName.value;
   const newLink = inputNewPlaceLink.value;
 
-  const newCard = addNewCard(newLink, newName);
-  changePopupVisibility(popupAddNewPlace, 'popup_opened');
+  addNewCard(newLink, newName);
+  changePopupVisibility(popupAddNewPlace);
 
-  inputNewPlaceName.value = null;
-  inputNewPlaceLink.value = null;
+  popupNewPlaceForm.reset();
+};
+
+function resetForm(element){
+  const formElement = element.querySelector('.form');
+  formElement.reset();
 };
 
 initialCards.reverse().forEach(item => addNewCard(item.link, item.name));
 
-addNewPlaceButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace, 'popup_opened'));
+addNewPlaceButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace));
 popupNewPlaceForm.addEventListener('submit', newPlaceSubmitHandler);
-editButton.addEventListener('click', inputProfileData);
-editCloseButton.addEventListener('click', () => changePopupVisibility(popupEditProfile, 'popup_opened'));
+editButton.addEventListener('click', openPopupEditProfile);
+editCloseButton.addEventListener('click', () => {
+  changePopupVisibility(popupEditProfile);
+  resetForm(popupEditProfile);
+});
+popupEditProfile.addEventListener('mousedown', (evt) => {
+  if(evt.target.classList.contains('popup')){
+    changePopupVisibility(popupEditProfile);
+  }
+});
+popupAddNewPlace.addEventListener('mousedown', (evt) => {
+  if(evt.target.classList.contains('popup')){
+    changePopupVisibility(popupAddNewPlace);
+  }
+});
+popupCard.addEventListener('mousedown', (evt) => {
+  if(evt.target.classList.contains('popup')){
+    changePopupVisibility(popupCard);
+  }
+});
+document.addEventListener('keydown', (evt) => {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape' && popupOpened){
+    changePopupVisibility(popupOpened);
+  }
+});
 popupEditProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
-addNewPlaceCloseButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace, 'popup_opened'));
-popupCardClose.addEventListener('click', () => changePopupVisibility(popupCard, 'popup_opened'));
+addNewPlaceCloseButton.addEventListener('click', () => {
+  changePopupVisibility(popupAddNewPlace);
+  resetForm(popupAddNewPlace);
+});
+popupCardClose.addEventListener('click', () => changePopupVisibility(popupCard));

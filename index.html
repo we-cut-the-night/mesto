@@ -42,10 +42,18 @@
       <article class="popup popup_type_edit-profile">
         <div class="popup__content">
           <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
-          <form class="form" name="edit_profile_form">
+          <form class="form" name="edit_profile_form" novalidate>
             <h2 class="form__title">Редактировать профиль</h2>
-            <input required class="form__input form__input_type_name" type="text" name="username" placeholder="Имя">
-            <input required class="form__input form__input_type_caption" type="text" name="userdescription" placeholder="Описание">
+            <label class="form__field">
+              <input class="form__input form__input_type_name" id="form__input_type_user-name"
+                    type="text" name="username" placeholder="Имя" minlength="2" maxlength="40" required>
+              <span class="form__input-error form__input_type_user-name-error"></span>
+            </label>
+            <label class="form__field">
+              <input class="form__input form__input_type_caption" id="form__input_type_caption"
+                    type="text" name="userdescription" placeholder="Описание" minlength="2" maxlength="200" required>
+              <span class="form__input-error form__input_type_caption-error"></span>
+            </label>
             <button class="form__submit" type="submit">Сохранить</button>
           </form>
         </div>
@@ -53,10 +61,18 @@
       <article class="popup popup_type_add-new-place">
         <div class="popup__content">
           <button class="popup__close" type="button" aria-label="Закрыть форму"></button>
-          <form class="form" name="new_place_form">
+          <form class="form" name="new_place_form" novalidate>
             <h2 class="form__title">Новое место</h2>
-            <input required class="form__input form__input_type_name" type="text" name="placename" placeholder="Название">
-            <input required class="form__input form__input_type_link" type="text" name="placelink" placeholder="Ссылка на картинку">
+            <label class="form__field">
+              <input class="form__input form__input_type_name" id="form__input_type_place-name"
+                    type="text" name="placename" placeholder="Название" minlength="2" maxlength="30" required>
+              <span class="form__input-error form__input_type_place-name-error"></span>
+            </label>
+            <label class="form__field">
+              <input class="form__input form__input_type_link" id="form__input_type_link"
+                    type="url" name="placelink" placeholder="Ссылка на картинку" required>
+              <span class="form__input-error form__input_type_link-error"></span>
+            </label>
             <button class="form__submit" type="submit">Сохранить</button>
           </form>
         </div>
@@ -77,5 +93,6 @@
     </footer>
   <script src="./scripts/constants.js"></script>
   <script src="./scripts/script.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
