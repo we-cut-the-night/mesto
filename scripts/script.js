@@ -103,7 +103,12 @@ function resetForm(element){
 initialCards.reverse().forEach(item => addNewCard(item.link, item.name));
 
 addNewPlaceButton.addEventListener('click', () => changePopupVisibility(popupAddNewPlace));
-popupNewPlaceForm.addEventListener('submit', newPlaceSubmitHandler);
+popupNewPlaceForm.addEventListener('submit', (evt) => {
+  const inputList = Array.from(popupNewPlaceForm.querySelectorAll('.form__input'));
+  if (!hasInvalidInput(inputList)) {
+    newPlaceSubmitHandler(evt);
+  };
+});
 editButton.addEventListener('click', openPopupEditProfile);
 editCloseButton.addEventListener('click', () => {
   changePopupVisibility(popupEditProfile);
@@ -130,8 +135,13 @@ document.addEventListener('keydown', (evt) => {
     changePopupVisibility(popupOpened);
   }
 });
-popupEditProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
-addNewPlaceCloseButton.addEventListener('click', () => {
+popupEditProfileForm.addEventListener('submit', (evt) => {
+  const inputList = Array.from(popupEditProfileForm.querySelectorAll('.form__input'));
+  if (!hasInvalidInput(inputList)) {
+    editProfileFormSubmitHandler(evt);
+  };
+});
+addNewPlaceCloseButton.addEventListener('click', (evt) => {
   changePopupVisibility(popupAddNewPlace);
   resetForm(popupAddNewPlace);
 });
