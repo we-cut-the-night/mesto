@@ -28,3 +28,14 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const validationConfig = {
+  formElementClass: '.form',
+  inputElementClass: '.form__input',
+  inputElementErrorClass: 'form__input_type_error',
+  errorElementActiveClass: 'form__input-error_active',
+  submitButtonClass: '.form__submit',
+  submitDisabledButtonClass: 'form__submit_disabled'
+};
+
+const ESC_CODE = 'Escape';
