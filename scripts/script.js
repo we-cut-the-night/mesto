@@ -116,7 +116,6 @@ function newPlaceSubmitHandler(config, evt){
 };
 
 function resetForm(element){
-  console.log('reset')
   const formElement = element.querySelector('.form');
   if(formElement){
     formElement.reset();
