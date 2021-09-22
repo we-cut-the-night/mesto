@@ -41,8 +41,8 @@ function closePopup(element){
 
 function closeByEsc(evt, element) {
   if (evt.key === ESC_CODE) {
-    closePopup(element);
     resetForm(element);
+    closePopup(element);
   }
 };
 
@@ -116,6 +116,7 @@ function newPlaceSubmitHandler(config, evt){
 };
 
 function resetForm(element){
+  console.log('reset')
   const formElement = element.querySelector('.form');
   if(formElement){
     formElement.reset();
