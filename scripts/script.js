@@ -29,20 +29,25 @@ const popupCardTitle = popupCard.querySelector('.popup-card__title');
 const cardTemplate = document.querySelector('#card_template').content;
 const cardsContainer = document.querySelector('.cards');
 
+function testConsole(){
+  console.log('testconsole')
+}
+
 function openPopup(element){
   element.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => closeByEsc(evt, element));
+  document.addEventListener('keydown', closeByEsc);
 };
 
 function closePopup(element){
   element.classList.remove('popup_opened');
-  document.removeEventListener('keydown',  (evt) => closeByEsc(evt, element));
+  document.removeEventListener('keydown', closeByEsc);
 };
 
-function closeByEsc(evt, element) {
+function closeByEsc(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === ESC_CODE) {
-    resetForm(element);
-    closePopup(element);
+    resetForm(popupOpened);
+    closePopup(popupOpened);
   }
 };
 
