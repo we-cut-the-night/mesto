@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -29,7 +29,7 @@ const initialCards = [
   }
 ];
 
-const validationConfig = {
+export const validationConfig = {
   formElementClass: '.form',
   inputElementClass: '.form__input',
   inputElementErrorClass: 'form__input_type_error',
@@ -38,4 +38,4 @@ const validationConfig = {
   submitDisabledButtonClass: 'form__submit_disabled'
 };
 
-const ESC_CODE = 'Escape';
+export const ESC_CODE = 'Escape';
