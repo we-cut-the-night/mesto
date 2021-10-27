@@ -48,9 +48,11 @@ function closePopup(element){
 
 function openPopupEditProfile(){
   openPopup(popupEditProfile)
+  formValidatorProfile.toggleButtonState()
 
   inputName.value = profileName.textContent
   inputCaption.value = profileCaption.textContent
+
 }
 
 function createNewCard(data, idTemplate){
@@ -58,7 +60,6 @@ function createNewCard(data, idTemplate){
 }
 
 function editProfileFormSubmitHandler(evt) {
-  //const buttonElement = popupEditProfile.querySelector(config.submitButtonClass)
   evt.preventDefault()
 
   profileName.textContent = inputName.value
@@ -80,8 +81,6 @@ function resetForm(element){
   const formElement = element.querySelector('.form')
   if(formElement){
     formElement.reset()
-    formValidatorCard.toggleButtonState()
-    formValidatorProfile.toggleButtonState()
   }
 }
 
@@ -117,7 +116,11 @@ formValidatorCard.enableValidation()
 
 
 // Слушатели событий: добавление фото в галерею
-addNewPlaceButton.addEventListener('click', () => openPopup(popupAddNewPlace))
+addNewPlaceButton.addEventListener('click', () => {
+  openPopup(popupAddNewPlace)
+  formValidatorCard.toggleButtonState()
+})
+
 popupNewPlaceForm.addEventListener('submit', newPlaceSubmitHandler)
 popupAddNewPlace.addEventListener('mousedown', closeByOverlayClick)
 
