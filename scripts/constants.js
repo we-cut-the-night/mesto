@@ -27,7 +27,7 @@ export const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-];
+]
 
 export const validationConfig = {
   formElementClass: '.form',
@@ -36,6 +36,10 @@ export const validationConfig = {
   errorElementActiveClass: 'form__input-error_active',
   submitButtonClass: '.form__submit',
   submitDisabledButtonClass: 'form__submit_disabled'
-};
+}
 
-export const ESC_CODE = 'Escape';
+export const ESC_CODE = 'Escape'
+
+export const userInfoData = {name: 'Билл Клинтон', caption: 'Экс-президент США'}
+
+

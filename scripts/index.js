@@ -1,143 +1,91 @@
-import {initialCards, validationConfig, ESC_CODE} from './constants.js'
+// Импорт классов и переменных
+import UserInfo from './UserInfo.js'
 import Card from './Card.js'
+import Section from './Section.js'
+import PopupWithImage from './PopupWithImage.js'
+import PopupWithForm from './PopupWithForm.js'
 import FormValidator from './FormValidator.js'
+import {initialCards, validationConfig, userInfoData, ESC_CODE} from './constants.js'
 
 
-// Профиль пользователя
+// DOM: профиль пользователя
 const editButton = document.querySelector('.profile__edit')
-const profileName = document.querySelector('.profile__name')
-const profileCaption = document.querySelector('.profile__caption')
 
-// Форма для редактирования профиля
+
+// DOM: форма для редактирования профиля
 const popupEditProfile = document.querySelector('.popup_type_edit-profile')
-const editCloseButton = popupEditProfile.querySelector('.popup__close')
 const popupEditProfileForm = popupEditProfile.querySelector('.form')
 const inputName = popupEditProfileForm.querySelector('.form__input_type_name')
 const inputCaption = popupEditProfileForm.querySelector('.form__input_type_caption')
 
-// Галерея
-const addNewPlaceButton = document.querySelector('.profile__button')
-const popupAddNewPlace = document.querySelector('.popup_type_add-new-place')
-const addNewPlaceCloseButton = popupAddNewPlace.querySelector('.popup__close')
-const popupNewPlaceForm = document.querySelector('.form[name=new_place_form]')
-const inputNewPlaceName = popupNewPlaceForm.querySelector('.form__input_type_name')
-const inputNewPlaceLink = popupNewPlaceForm.querySelector('.form__input_type_link')
+
+// DOM: галерея
 const cardsContainer = document.querySelector('.cards')
-
-// Попап с фото
-const popupCard = document.querySelector('.popup_type_card')
-const popupCardImg = popupCard.querySelector('.popup-card__img')
-const popupCardClose = popupCard.querySelector('.popup__close')
-
-//Валидация форм
-const formValidatorProfile = new FormValidator(validationConfig, 'edit_profile_form')
-const formValidatorCard = new FormValidator(validationConfig, 'new_place_form')
+const addNewPlaceButton = document.querySelector('.profile__button')
 
 
 // Объявление функций
-function openPopup(element){
-  element.classList.add('popup_opened')
-  resetForm(element)
-  document.addEventListener('keydown', closeByEsc)
+function handleCardClick({name, link}){
+  popupImage.open(name, link)
 }
 
-function closePopup(element){
-  element.classList.remove('popup_opened')
-  document.removeEventListener('keydown', closeByEsc)
+function createNewCard(data){
+  return new Card({data, handleCardClick}, '#card_template').generateCard()
 }
 
 function openPopupEditProfile(){
-  openPopup(popupEditProfile)
+  const data = userInfo.getUserInfo()
+  popupProfile.open()
   formValidatorProfile.toggleButtonState()
-
-  inputName.value = profileName.textContent
-  inputCaption.value = profileCaption.textContent
-
+  inputName.value = data.name
+  inputCaption.value = data.caption
 }
 
-function createNewCard(data, idTemplate){
-  return new Card(data, idTemplate, openPopupCard).generateCard()
-}
-
-function editProfileFormSubmitHandler(evt) {
+function editProfileFormSubmitHandler(evt, data){
   evt.preventDefault()
-
-  profileName.textContent = inputName.value
-  profileCaption.textContent = inputCaption.value
-
-  closePopup(popupEditProfile)
-
+  userInfo.setUserInfo(data)
+  popupProfile.close()
   formValidatorCard.toggleButtonState()
 }
 
-function newPlaceSubmitHandler(evt){
+function newPlaceSubmitHandler(evt, cardData){
   evt.preventDefault()
-  cardsContainer.prepend(createNewCard({name: inputNewPlaceName.value, link: inputNewPlaceLink.value}, '#card_template'))
-  closePopup(popupAddNewPlace)
+  cardsContainer.prepend(createNewCard({name: cardData.name, link: cardData.caption}))
+  popupNewCard.close()
   formValidatorCard.toggleButtonState()
 }
 
-function resetForm(element){
-  const formElement = element.querySelector('.form')
-  if(formElement){
-    formElement.reset()
+function handleEscClose(evt){
+  if (evt.key === ESC_CODE){
+    const popupOpened = document.querySelector('.popup_opened')
+    popupOpened.classList.remove('popup_opened')
+    document.removeEventListener('keydown', handleEscClose)
   }
 }
 
-function closeByOverlayClick(evt) {
-  if(evt.target.classList.contains('popup')){
-      const openedPopup = document.querySelector('.popup_opened');
-      closePopup(openedPopup)
-}}
-
-function closeByEsc(evt) {
-  const popupOpened = document.querySelector('.popup_opened')
-  if (evt.key === ESC_CODE) {
-    closePopup(popupOpened)
-  }
-}
-
-function openPopupCard(data){
-  openPopup(popupCard)
-
-  popupCardImg.src = data.link
-  popupCardImg.alt = data.name
-  popupCard.querySelector('.popup-card__title').textContent = data.name
-}
+// Объекты: создание экземпляров классов
+const userInfo = new UserInfo({nameElement: '.profile__name', captionElement: '.profile__caption'})
+const sectionCards = new Section({items: initialCards.reverse(), renderer: createNewCard}, '.cards')
+const popupImage = new PopupWithImage('.popup_type_card', handleEscClose)
+const popupProfile = new PopupWithForm('.popup_type_edit-profile', handleEscClose, editProfileFormSubmitHandler)
+const formValidatorProfile = new FormValidator(validationConfig, 'edit_profile_form')
+const popupNewCard = new PopupWithForm('.popup_type_add-new-place', handleEscClose, newPlaceSubmitHandler)
+const formValidatorCard = new FormValidator(validationConfig, 'new_place_form')
 
 
 // Дейстивия при загрузке страницы
-initialCards.reverse().forEach((data) => {
-  cardsContainer.prepend(createNewCard(data, '#card_template'))
-})
-
-formValidatorProfile.enableValidation()
-formValidatorCard.enableValidation()
+userInfo.setUserInfo(userInfoData) // заполнение профиля пользователя
+sectionCards.renderItems() // заполнение галереи с карточками
+formValidatorProfile.enableValidation() // активация валидации формы для редактирования профиля
+formValidatorCard.enableValidation() // активация валидации формы для добавления новой карточки
 
 
-// Слушатели событий: добавление фото в галерею
-addNewPlaceButton.addEventListener('click', () => {
-  openPopup(popupAddNewPlace)
+// Слушатели событий: открытие попапа с формой
+addNewPlaceButton.addEventListener('click', () => { // слушатель кнопки открытия формы добавления новой карточки
+  popupNewCard.open()
   formValidatorCard.toggleButtonState()
 })
-
-popupNewPlaceForm.addEventListener('submit', newPlaceSubmitHandler)
-popupAddNewPlace.addEventListener('mousedown', closeByOverlayClick)
-
-addNewPlaceCloseButton.addEventListener('click', (evt) => {
-  closePopup(popupAddNewPlace)
-})
-
-popupCardClose.addEventListener('click', () => closePopup(popupCard))
-popupCard.addEventListener('mousedown', closeByOverlayClick)
-
-
-// Слушатели событий: редактирование профиля
-editButton.addEventListener('click', openPopupEditProfile)
-
-editCloseButton.addEventListener('click', () => {
-  closePopup(popupEditProfile)
-})
-
-popupEditProfile.addEventListener('mousedown', closeByOverlayClick)
-popupEditProfileForm.addEventListener('submit', editProfileFormSubmitHandler)
+editButton.addEventListener('click', openPopupEditProfile) // слушатель кнопки открытия формы редактирования профиля
+popupImage.setEventListeners() // слушатели на закрытие попапа
+popupProfile.setEventListeners() // слушатели на закрытие попапа и сабмит формы
+popupNewCard.setEventListeners() // слушатели на закрытие попапа и сабмит формы

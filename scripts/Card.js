@@ -1,11 +1,9 @@
-import {ESC_CODE} from './constants.js'
-
 export default class Card {
-  constructor(data, idTemplate, openPopup) {
+  constructor({data, handleCardClick}, idTemplate) {
     this._link = data.link
     this._name = data.name
     this._idTemplate = idTemplate
-    this._openPopup = openPopup
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate(){
@@ -17,7 +15,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__img').addEventListener('click', () => {this._openPopup({link: this._link, name: this._name})})
+    this._element.querySelector('.card__img').addEventListener('click', () => {this._handleCardClick({link: this._link, name: this._name})})
     this._element.querySelector('.card__like').addEventListener('click', (evt) => this._handleLikeButton(evt))
     this._element.querySelector('.card__delete').addEventListener('click', () => {
       this._element.remove()
