@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
     <title>Mesto Russia</title>
 </head>
 <body class="root">
@@ -13,7 +13,7 @@
 
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/mesto_clinton.png" alt="Билл Клинтон">
+        <img class="profile__avatar" src="<%=require('./images/mesto_clinton.png')%>" alt="Билл Клинтон">
         <div class="profile__info">
           <div class="profile__title">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -22,7 +22,7 @@
             <p class="profile__caption">Исследователь океана</p>
         </div>
         <button class="profile__button" type="button">
-          <img class="profile__icon" src="./images/mesto_button.svg" alt="Загрузить фото">
+          <img class="profile__icon" src="<%=require('./images/mesto_button.svg')%>" alt="Загрузить фото">
         </button>
       </section>
 
@@ -91,6 +91,6 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;2021 Mesto Russia</p>
     </footer>
-  <script type="module" src="./scripts/index.js"></script>
+  <!-- <script type="module" src="./scripts/index.js"></script> -->
 </body>
 </html>

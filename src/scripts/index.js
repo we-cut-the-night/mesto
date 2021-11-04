@@ -1,4 +1,5 @@
 // Импорт классов и переменных
+import '../pages/index.css'
 import UserInfo from './UserInfo.js'
 import Card from './Card.js'
 import Section from './Section.js'
