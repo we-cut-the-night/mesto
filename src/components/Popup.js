@@ -1,11 +1,19 @@
+import {ESC_CODE} from '../utils/constants.js'
+
 export default class Popup {
-  constructor(selector, callback){
+  constructor(selector){
     this._element = document.querySelector(selector)
-    this._handleEsc = callback
+    this._handleEsc = this._handleEscClose.bind(this)
   }
 
   _closeByOverlayClick(evt){
     if(evt.target.classList.contains('popup')){
+      this.close()
+    }
+  }
+
+  _handleEscClose(evt){
+    if (evt.key === ESC_CODE){
       this.close()
     }
   }
@@ -16,8 +24,7 @@ export default class Popup {
   }
 
   close(){
-    const popupOpened = document.querySelector('.popup_opened')
-    popupOpened.classList.remove('popup_opened')
+    this._element.classList.remove('popup_opened')
     document.removeEventListener('keydown', this._handleEsc)
   }
 

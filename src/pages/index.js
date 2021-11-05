@@ -1,16 +1,17 @@
 // Импорт классов и переменных
-import '../pages/index.css'
-import UserInfo from './UserInfo.js'
-import Card from './Card.js'
-import Section from './Section.js'
-import PopupWithImage from './PopupWithImage.js'
-import PopupWithForm from './PopupWithForm.js'
-import FormValidator from './FormValidator.js'
-import {initialCards, validationConfig, userInfoData, ESC_CODE} from './constants.js'
+import './index.css'
+import UserInfo from '../components/UserInfo.js'
+import Card from '../components/Card.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import FormValidator from '../components/FormValidator.js'
+import {initialCards, validationConfig, userInfoData} from '../utils/constants.js'
 
 
-// DOM: профиль пользователя
+// DOM: кнопки
 const editButton = document.querySelector('.profile__edit')
+const addNewPlaceButton = document.querySelector('.profile__button')
 
 
 // DOM: форма для редактирования профиля
@@ -18,11 +19,6 @@ const popupEditProfile = document.querySelector('.popup_type_edit-profile')
 const popupEditProfileForm = popupEditProfile.querySelector('.form')
 const inputName = popupEditProfileForm.querySelector('.form__input_type_name')
 const inputCaption = popupEditProfileForm.querySelector('.form__input_type_caption')
-
-
-// DOM: галерея
-const cardsContainer = document.querySelector('.cards')
-const addNewPlaceButton = document.querySelector('.profile__button')
 
 
 // Объявление функций
@@ -51,26 +47,19 @@ function editProfileFormSubmitHandler(evt, data){
 
 function newPlaceSubmitHandler(evt, cardData){
   evt.preventDefault()
-  cardsContainer.prepend(createNewCard({name: cardData.name, link: cardData.caption}))
+  sectionCards.addItem({name: cardData.name, link: cardData.link})
   popupNewCard.close()
   formValidatorCard.toggleButtonState()
 }
 
-function handleEscClose(evt){
-  if (evt.key === ESC_CODE){
-    const popupOpened = document.querySelector('.popup_opened')
-    popupOpened.classList.remove('popup_opened')
-    document.removeEventListener('keydown', handleEscClose)
-  }
-}
 
 // Объекты: создание экземпляров классов
 const userInfo = new UserInfo({nameElement: '.profile__name', captionElement: '.profile__caption'})
 const sectionCards = new Section({items: initialCards.reverse(), renderer: createNewCard}, '.cards')
-const popupImage = new PopupWithImage('.popup_type_card', handleEscClose)
-const popupProfile = new PopupWithForm('.popup_type_edit-profile', handleEscClose, editProfileFormSubmitHandler)
+const popupImage = new PopupWithImage('.popup_type_card')
+const popupProfile = new PopupWithForm('.popup_type_edit-profile', editProfileFormSubmitHandler)
 const formValidatorProfile = new FormValidator(validationConfig, 'edit_profile_form')
-const popupNewCard = new PopupWithForm('.popup_type_add-new-place', handleEscClose, newPlaceSubmitHandler)
+const popupNewCard = new PopupWithForm('.popup_type_add-new-place', newPlaceSubmitHandler)
 const formValidatorCard = new FormValidator(validationConfig, 'new_place_form')
 
 
