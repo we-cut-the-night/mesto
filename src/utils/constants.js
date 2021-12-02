@@ -40,6 +40,6 @@ export const validationConfig = {
 
 export const ESC_CODE = 'Escape'
 
-export const userInfoData = {name: 'Билл Клинтон', caption: 'Экс-президент США'}
+export const userInfoData = {name: 'Жак-Ив Кусто', caption: 'Исследователь, путешественник', avatar: 'https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg'}
 
 

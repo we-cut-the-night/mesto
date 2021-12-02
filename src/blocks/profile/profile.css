@@ -4,6 +4,7 @@
   max-width: calc(1280px - 200px * 2);
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 @media (max-width: calc(282px * 3 + 17px * 2 + 18.5px * 2)) {
