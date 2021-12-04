@@ -171,7 +171,7 @@ function newPlaceSubmitHandler(evt, cardData){
       sectionCards.addItem(cardData)
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
-    .finally(renderLoading(evt, false))
+    .finally(() => renderLoading(evt, false))
 }
 
 function updateUserInfo(evt, {name, caption}){
