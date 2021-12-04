@@ -8,7 +8,7 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import PopupDeleteCard from '../components/PopupDeleteCard.js'
 import FormValidator from '../components/FormValidator.js'
-import {initialCards, validationConfig, userInfoData} from '../utils/constants.js'
+import {validationConfig} from '../utils/constants.js'
 
 
 // Кнопки открытия форм
@@ -68,7 +68,7 @@ function renderUserInfo(dataUser){
 }
 
 function renderCards(dataCards){
-  sectionCards = new Section({items: Array.from(dataCards).slice(0, 9), renderer: createNewCard}, '.cards')
+  sectionCards = new Section({items: Array.from(dataCards).slice(0, 50), renderer: createNewCard}, '.cards')
   sectionCards.renderItems()
 }
 
@@ -87,17 +87,17 @@ function handleCardClick({name, link}){
   popupImage.open(name, link)
 }
 
-function handleLikeClick(data){
-  if (!data.isLiked()){
-    api.setCardLike(data.cardId)
+function handleLikeClick(card){
+  if (!card.isLiked()){
+    api.setCardLike(card.cardId)
     .then(dataCard => {
-      this.updateLikeData(dataCard.likes)
+      card.updateLikeData(dataCard.likes)
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
   } else {
-    api.deleteCardLike(data.cardId)
+    api.deleteCardLike(card.cardId)
     .then(dataCard => {
-      this.updateLikeData(dataCard.likes)
+      card.updateLikeData(dataCard.likes)
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
   }
@@ -105,10 +105,11 @@ function handleLikeClick(data){
 
 function deleteCard(cardElement){
   api.deleteCard(cardElement.cardId)
+  .then(() => {
+    popupDeleteCard.close()
+    popupDeleteCard.cardElement.removeThisCard()
+  })
   .catch((err) => console.log(`Ошибка: ${err}`))
-
-  popupDeleteCard.close()
-  popupDeleteCard.cardElement.removeThisCard()
 }
 
 function handleDeleteCard(cardElement){
@@ -144,39 +145,44 @@ function openPopupAvatar(){
 function avatarFormSubmitHandler(evt, link){
   evt.preventDefault()
   renderLoading(evt, true)
+
   api.setUserAvatar({avatar: link.link})
   .then((res) => renderUserInfo({name: res.name, caption: res.about, link: res.avatar}))
+  .then(() => {
+    popupAvatar.close()
+    formAvatar.toggleButtonState()
+  })
   .catch((err) => console.log(`Ошибка: ${err}`))
-  .finally(renderLoading(evt, false))
-
-  popupAvatar.close()
-  formAvatar.toggleButtonState()
+  .finally(() => {renderLoading(evt, false)})
 }
 
 function editProfileFormSubmitHandler(evt, data){
   evt.preventDefault()
   renderLoading(evt, true)
-  updateUserInfo(data)
-  .finally(renderLoading(evt, false))
-  popupProfile.close()
-  formValidatorCard.toggleButtonState()
+  updateUserInfo(evt, data)
 }
 
 function newPlaceSubmitHandler(evt, cardData){
   evt.preventDefault()
   renderLoading(evt, true)
   api.uploadNewCard({name: cardData.name, link: cardData.link})
-    .then((cardData) => sectionCards.addItem(cardData))
+    .then((cardData) => {
+      popupNewCard.close()
+      sectionCards.addItem(cardData)
+    })
     .catch((err) => console.log(`Ошибка: ${err}`))
     .finally(renderLoading(evt, false))
-  popupNewCard.close()
-  formValidatorCard.toggleButtonState()
 }
 
-function updateUserInfo({name, caption}){
+function updateUserInfo(evt, {name, caption}){
   api.setUserInfo({name: name, about: caption})
     .then((data) => {userInfo.setUserInfo({name: data.name, caption: data.about})})
+    .then(() => {
+      popupProfile.close()
+      formValidatorCard.toggleButtonState()
+    })
     .catch((err) => console.log(`Ошибка: ${err}`))
+    .finally(() => {renderLoading(evt, false)})
 }
 
 addNewPlaceButton.addEventListener('click', () => { // открыть попап новой карточки
